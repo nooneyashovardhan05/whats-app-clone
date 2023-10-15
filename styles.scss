@@ -1,0 +1,110 @@
+@use "variables";
+@use "mixins";
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@100&family=Hubballi&family=Work+Sans&display=swap');
+
+.body {
+    font-family: 'Work Sans', sans-serif;
+    color: variables.$primary-font-color;
+}
+
+.body, .page-not-found {
+    background-color: variables.$container-background-color;
+}
+
+.reset-styles, .body, .search-input, .chat-list-separator {
+    margin: 0;
+    padding: 0;
+}
+
+.main-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.chat-not-found, .anonymous-chat-box, .chat-conversation-container {
+    width: 67vw;
+}
+
+.page-not-found, .chat-not-found, .anonymous-chat-box {
+    height: 100vh;
+    display: flex;
+    
+    .main-content {
+        flex: 1;
+        flex-direction: column;
+        gap: 50px;
+      
+        .chat-icon {
+            @include mixins.element-sizes(276px, 245.33px);
+        }
+
+        .title, .description {
+            text-align: center;
+        }
+      
+        .title {
+            @include mixins.font-styles(40px, 47px, -0.025em);
+            margin-bottom: 20px;
+        }
+      
+        .description {
+            @include mixins.font-styles(20px, 23px, -0.025em);
+        }
+    }
+}
+
+.user-profile, .conversation-header {
+    @extend .main-content;
+    justify-content: space-between;
+    padding: 13px 23px 11px 29px;
+    
+    .profile-header, .group-chat-profile-icon, .profile-icon {
+        @extend .main-content;
+        gap: 10px;
+        
+        .group-chat-name {
+            @include mixins.font-styles(variables.$large-font-size, 23px, -0.025em, 500);
+        }
+    }
+}
+
+.profile-icon {
+    @include mixins.element-sizes(50px, 50px);
+    background-color: variables.$profile-icon-background-color;
+    border: 2px solid variables.$secondary-background-color;
+    border-radius: 50%;
+
+    .user-icon, .chat-profile-icon {
+        @include mixins.element-sizes(20px, 15px);
+    }
+}
+
+.group-chat-icon-container {
+    margin: 20px 0 11px 29px;
+    @extend .profile-icon;
+    @extend .main-content;
+    border: 0;
+    @include mixins.element-sizes(56px, 56px);
+
+    .group-chat-icon {
+        @include mixins.element-sizes(25.09px, 18.82px);
+    }
+}
+
+.group-chat-profile-icon {
+    @extend .profile-icon;
+}
+
+.chat-list-container, .conversation-messages {
+    overflow-y: scroll;
+
+    &::-webkit-scrollbar {
+        background-color: variables.$scroll-bar-background;
+        @include mixins.element-sizes(8px);
+    }
+    
+    &::-webkit-scrollbar-thumb {
+        background: variables.$scroll-bar-thumb-color;
+    }
+}

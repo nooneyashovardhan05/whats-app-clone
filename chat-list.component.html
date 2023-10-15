@@ -1,0 +1,47 @@
+<div class="main">
+    <div class="chat-list">
+        <div class="user-profile">
+            <div class="profile-header">
+                <div class="profile-icon">
+                    <img class="user-icon" src="../../../assets/user-icon.svg">
+                </div>
+                <p class="reset-styles group-chat-name">Yashovardhan</p>
+            </div>
+            <img src="../../../assets/chat-groups-icon.svg">
+        </div>
+        <div class="search-container">
+            <div class="search-bar">
+                <label for="search"><img class="search-icon" src="../../../assets/search-icon.svg"></label>
+                <input type="text" id="search" [(ngModel)]="searchTerm" (ngModelChange)="filterChatList()" class="search-input" placeholder="Search Chat Group">
+            </div>
+            <img src="../../../assets/add-group-chat-icon.svg" (click)="addGroupChat()">
+        </div>
+        <hr class="chat-list-separator">
+        <div class="chat-list-container">
+            <div *ngIf="!checkObjectEmpty(groupChatList)" class="group-chat-list">
+                <div class="group-chat" *ngFor="let chat of getObjectKeys(groupChatList)" [routerLink]="[chat]" routerLinkActive="active-group-chat">
+                    <div class="group-chat-icon-container">
+                        <img class="group-chat-icon" src="../../../assets/group-chat-icon.svg">
+                    </div>
+                    <div class="group-chat-details">
+                        <div class="chat-details">
+                            <div class="group-chat-name">{{groupChatList[chat].name}}</div>
+                            <div class="recent-message">
+                                <span *ngIf="groupChatList[chat].messages[groupChatList[chat].messages.length-1].sender.length">
+                                    {{groupChatList[chat].messages[groupChatList[chat].messages.length-1].sender+':'}}
+                                </span>
+                                {{groupChatList[chat].messages[groupChatList[chat].messages.length-1].text}}
+                            </div>
+                        </div>
+                        <div class="date">
+                            <p class="reset-styles">
+                                {{formatDateTime(groupChatList[chat].messages[groupChatList[chat].messages.length-1].date,"dd/MM/yyyy")}}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <router-outlet></router-outlet>
+</div>

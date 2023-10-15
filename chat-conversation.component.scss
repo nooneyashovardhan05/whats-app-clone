@@ -1,0 +1,92 @@
+@use "../../../variables.scss";
+@use "../../../mixins.scss";
+
+.chat-conversation {
+    background: url("../../../assets/chat-conversation-background.svg") variables.$chat-conversation-background-color;
+    @include mixins.element-sizes($height: 100vh);
+    
+    &, .conversation-messages {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .conversation-header {
+        background-color: variables.$container-background-color;
+
+        .delete-icon-container {
+            padding: 12px;
+        }
+    }
+
+    .conversation-messages {
+        flex: 1;
+        gap: 16px;
+        padding: 24px 32px;
+
+        .message {
+            padding: 14px 10px 6px 19px;
+            border-radius: 10px;
+            max-width: calc(50% - 40px);
+            color: variables.$message-font-color;
+
+            .text {
+                overflow-wrap: break-word;
+                margin-right: 50px;
+                @include mixins.font-styles(14px, 16px, -0.025em);
+            }
+            
+            .sent-time {
+                text-align: right;
+                @include mixins.font-styles(7px, 8px, -0.025em);
+            }
+        }
+        
+        .creation-message, .user-message {
+            background-color: variables.$user-message-color;
+        }
+        
+        .creation-message {
+            align-self: center;
+
+            .text {
+                font-style: italic;
+            }
+        }
+
+        .user-message {
+            align-self: flex-end;
+        }
+        
+        .anonymous-message {
+            align-self: flex-start;
+            background-color: variables.$secondary-background-color;
+        }
+    }
+
+    .conversation-footer {
+        background-color: variables.$container-background-color;
+        padding: 20px 24px;
+        display: flex;
+        gap: 24px;
+        
+        .profile-mode-icon {
+            align-self: center;
+            @include mixins.element-sizes(32px, 32px);
+        }
+
+        .search-input {
+            flex: 1;
+            border: 0;
+            border-radius: 10px;
+            padding: 17px 20px;
+            outline: none;
+            resize: none;
+            overflow-y: auto;
+            @include mixins.font-styles(14px, 16px, -0.025em, 500);
+            
+            &::-webkit-scrollbar, &::-webkit-scrollbar-thumb {
+                background: variables.$scroll-bar-background;
+            }
+        }
+    }
+}

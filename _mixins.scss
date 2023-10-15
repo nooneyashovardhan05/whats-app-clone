@@ -1,0 +1,11 @@
+@mixin font-styles($size, $line-height, $letter-spacing, $weight:400) {
+    font-size: $size;
+    font-weight: $weight;
+    line-height: $line-height;
+    letter-spacing: $letter-spacing;
+}
+
+@mixin element-sizes($width:auto, $height:auto) {
+    width: $width;
+    height: $height;
+}

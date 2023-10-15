@@ -1,0 +1,29 @@
+<div class="chat-conversation-container">
+    <div class="chat-conversation" *ngIf="chatConversation">
+        <div class="conversation-header">
+            <div class="profile-header">
+                <div class="group-chat-profile-icon">
+                    <img class="chat-profile-icon" src="../../../assets/group-chat-icon.svg">
+                </div>
+                <p class="reset-styles group-chat-name">{{chatConversation.name}}</p>
+            </div>
+            <div (click)="deleteGroupChat(chatConversationId)" class="delete-icon-container">
+                <img src="../../../assets/delete-icon.svg">
+            </div>
+        </div>
+        <div class="conversation-messages" #conversationMessages>
+            <div class="message" *ngFor="let message of chatConversation.messages" [ngClass]="{
+                'creation-message': message.sender==='',
+                'user-message': message.sender==='You',
+                'anonymous-message': message.sender==='Anonymous'
+            }">
+                <p class="reset-styles text" *ngFor="let line of message.text.split('\n')">{{line}}</p>
+                <p class="reset-styles sent-time">{{formatDateTime(message.date, 'dd/MM/yyyy hh:mm a')}}</p>
+            </div>
+        </div>
+        <div class="conversation-footer">
+            <img [src]="profileModeImage" (click)="toggleImage()" class="profile-mode-icon">
+            <textarea name="newMessage" rows="1" class="search-input" (keyup.enter)="sendMessage()" placeholder="Type a message" [(ngModel)]="newMessage"></textarea>
+        </div>
+    </div>
+</div>

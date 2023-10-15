@@ -1,0 +1,109 @@
+@use "../../../variables.scss";
+@use "../../../mixins.scss";
+
+.main, .search-container, .search-bar, .group-chat, .active-group-chat, .group-chat-details {
+    display: flex;
+}
+
+.main {
+    height: 100vh;
+}
+
+.chat-list, .search-bar, .search-input, .group-chat-details {
+    flex: 1;
+}
+
+.chat-list-separator {
+    border: 1px solid variables.$chat-list-separator-color;
+}
+
+.search-container {
+    background-color: variables.$secondary-background-color;
+    padding: 13px 23px 11px 29px;
+    gap: 26px;
+    
+    .search-bar {
+        background-color: variables.$container-background-color;
+        
+        .search-icon {
+            padding: 15px 25px 15px 20px;
+        }
+        
+        .search-input {
+            background-color: variables.$container-background-color;
+            border: 0;
+            border-radius: 10px;
+            outline: none;
+
+            &::placeholder {
+                @include mixins.font-styles(14px, 16px, -0.025em, 500);
+            }
+        }
+    }
+}
+
+.chat-list-container {
+    padding-top: 19px;
+    padding-right: 6px;
+    background-color: variables.$secondary-background-color;
+    height: calc(100% - 180px);
+
+    .group-chat-list {
+        max-height: 75%;
+    }
+    
+    .group-chat, .active-group-chat {
+        gap: 10px;
+    }
+
+    .group-chat:hover {
+        background-color: variables.$chat-hover-background-color;
+        color: variables.$chat-hover-font-color;
+
+        .group-chat-details {
+            border-bottom: 1px solid variables.$chat-hover-separator-color;
+        }
+    }
+
+    .active-group-chat {
+        background-color: variables.$active-chat-background-color;
+        color: variables.$active-chat-font-color;
+
+        .group-chat-details {
+            border-bottom: 1px solid variables.$active-chat-separator-color;
+        }
+    }
+}
+
+.group-chat-details {
+    justify-content: space-between;
+    padding: 20px 10px 11px 0;
+    border-bottom: 1px solid variables.$chat-separator-color;
+    
+    .chat-details {
+        align-self: center;
+
+        .group-chat-name {
+            @include mixins.font-styles(variables.$large-font-size, 23px, -0.025em, 600);
+            margin-bottom: 2px;
+        }
+    
+        .recent-message {
+            @include mixins.font-styles(variables.$primary-font-size, 19px, -0.025em, 500);
+            width: 20vw;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow:ellipsis;
+        }
+    }
+
+    .date {
+        width: 77px;
+        justify-content: flex-end;
+
+        .reset-styles {
+            text-align: end;
+            @include mixins.font-styles(variables.$secondary-font-size, 16px, -0.025em, 600);
+        }
+    }
+}
